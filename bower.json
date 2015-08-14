@@ -9,5 +9,8 @@
     "node_modules",
     "bower_components",
     "output"
-  ]
+  ],
+  "dependencies": {
+    "purescript-unsafe-coerce": "~0.1.0"
+  }
 }

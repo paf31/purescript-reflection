@@ -4,6 +4,8 @@ module Data.Reflection
   , reify
   ) where
 
+import Unsafe.Coerce
+
 -- | This class reifies a value of type `a` at the type level.
 -- |
 -- | `reflect` can be used to recover the value inside a function passed
@@ -14,10 +16,8 @@ class Reifies a where
 -- | Reify a value of type `a` at the type level.
 -- |
 -- | The value can be recovered in the body of the lambda by using the `reflect` function.
-foreign import reify 
-  "function reify(a) {\
-  \  return function(run) {\
-  \     return run({ reflect: a });\
-  \  };\
-  \}" :: forall a r. a -> (forall dummy. (Reifies a) => r) -> r
-
+reify :: forall a r. a -> (forall dummy. (Reifies a) => r) -> r
+reify a f = toDictFun f { reflect: a }
+  where
+  toDictFun :: (forall dummy. (Reifies a) => r) -> { reflect :: a } -> r
+  toDictFun = unsafeCoerce
