@@ -16,8 +16,8 @@ class Reifies a where
 -- | Reify a value of type `a` at the type level.
 -- |
 -- | The value can be recovered in the body of the lambda by using the `reflect` function.
-reify :: forall a r. a -> (forall dummy. (Reifies a) => r) -> r
+reify :: forall a r. a -> ((Reifies a) => r) -> r
 reify a f = toDictFun f { reflect: a }
   where
-  toDictFun :: (forall dummy. (Reifies a) => r) -> { reflect :: a } -> r
+  toDictFun :: ((Reifies a) => r) -> { reflect :: a } -> r
   toDictFun = unsafeCoerce

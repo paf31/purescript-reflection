@@ -3,7 +3,8 @@ module Test.Main where
 import Prelude
 import Data.Reflection
 
-import Control.Monad.Eff.Console (print)
+import Control.Monad.Eff
+import Control.Monad.Eff.Console
 
 newtype S a = S a
 
@@ -20,6 +21,7 @@ instance reflectSemigroup :: (Reifies (SemigroupDict a)) => Semigroup (S a) wher
     where
     mappend = runSemigroupDict reflect
 
+main :: Eff (console :: CONSOLE) Unit
 main = reify dict do
   print $ runS $ S 1 <> S 2 <> S 3
   where

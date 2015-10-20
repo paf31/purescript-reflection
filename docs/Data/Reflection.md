@@ -15,7 +15,7 @@ to `reify`.
 #### `reify`
 
 ``` purescript
-reify :: forall a r. a -> (forall dummy. (Reifies a) => r) -> r
+reify :: forall a r. a -> (Reifies a) => r -> r
 ```
 
 Reify a value of type `a` at the type level.
