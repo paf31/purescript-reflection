@@ -1,29 +1,19 @@
 module Test.Main where
 
 import Prelude
-import Data.Reflection
+import Control.Monad.Eff (Eff)
+import Control.Monad.Eff.Console (CONSOLE, logShow)
+import Data.Monoid (class Monoid)
+import Data.Reflection.Monoid (reifyMonoid')
 
-import Control.Monad.Eff
-import Control.Monad.Eff.Console
-
-newtype S a = S a
-
-runS :: forall a. S a -> a
-runS (S a) = a
-
-newtype SemigroupDict a = SemigroupDict (a -> a -> a)
-
-runSemigroupDict :: forall a. SemigroupDict a -> a -> a -> a
-runSemigroupDict (SemigroupDict mappend) = mappend
-
-instance reflectSemigroup :: (Reifies (SemigroupDict a)) => Semigroup (S a) where
-  append (S a1) (S a2) = S $ mappend a1 a2
-    where
-    mappend = runSemigroupDict reflect
+-- | Build a custom `Monoid` for addition modulo n.
+withBase :: Int -> (forall m. Monoid m => (Int -> m) -> m) -> Int
+withBase n f = reifyMonoid' 0 (\a b -> (a + b) `mod` n) f
 
 main :: Eff (console :: CONSOLE) Unit
-main = reify dict do
-  print $ runS $ S 1 <> S 2 <> S 3
+main = do
+    logShow $ withBase 12 main'
+    logShow $ withBase 24 main'
   where
-  dict :: SemigroupDict Int
-  dict = SemigroupDict (+)
+    main' :: forall m. Monoid m => (Int -> m) -> m
+    main' f = f 1 <> f 2 <> f 3 <> f 4 <> f 5 <> f 6

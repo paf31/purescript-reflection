@@ -3,8 +3,8 @@
 #### `Reifies`
 
 ``` purescript
-class Reifies a where
-  reflect :: a
+class Reifies s a where
+  reflect :: Proxy s -> a
 ```
 
 This class reifies a value of type `a` at the type level.
@@ -15,7 +15,7 @@ to `reify`.
 #### `reify`
 
 ``` purescript
-reify :: forall a r. a -> (Reifies a) => r -> r
+reify :: forall a r. a -> (forall s. Reifies s a => Proxy s -> r) -> r
 ```
 
 Reify a value of type `a` at the type level.
