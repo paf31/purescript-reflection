@@ -1,5 +1,8 @@
 module Data.Reflection
-  ( class Reifies
+  ( class Given
+  , given
+  , give
+  , class Reifies
   , reflect
   , reify
   ) where
