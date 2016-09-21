@@ -32,7 +32,7 @@ give a f = coerce f { given: a }
 -- |
 -- | `reflect` can be used to recover the value inside a function passed
 -- | to `reify`.
-class Reifies s a where
+class Reifies s a | s -> a where
   reflect :: Proxy s -> a
 
 -- | Reify a value of type `a` at the type level.
