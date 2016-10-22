@@ -1,0 +1,14 @@
+{
+    "name": "reflection",
+    "source": "https://github.com/paf31/purescript-reflection.git",
+    "set": "psc-0.10.1",
+    "depends": [
+      "control",
+      "invariant",
+      "monoid",
+      "newtype",
+      "prelude",
+      "proxy",
+      "unsafe-coerce"
+    ]
+}
