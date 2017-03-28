@@ -14,8 +14,8 @@ import Unsafe.Coerce (unsafeCoerce)
 
 -- | This class reifies a value of type `a` at the type level.
 -- |
--- | `reflect` can be used to recover the value inside a function passed
--- | to `reify`.
+-- | `given` can be used to recover the value inside a function passed
+-- | to `give`.
 class Given a where
   given :: a
 
