@@ -1,8 +1,5 @@
 module Data.Reflection
-  ( class Given
-  , given
-  , give
-  , class Reifies
+  ( class Reifies
   , reflect
   , reify
   ) where
@@ -11,22 +8,6 @@ import Prelude
 
 import Type.Proxy (Proxy(..))
 import Unsafe.Coerce (unsafeCoerce)
-
--- | This class reifies a value of type `a` at the type level.
--- |
--- | `given` can be used to recover the value inside a function passed
--- | to `give`.
-class Given a where
-  given :: a
-
--- | Reify a value of type `a` at the type level.
--- |
--- | The value can be recovered in the body of the lambda by using the `given` value.
-give :: forall a r. a -> (Given a => r) -> r
-give a f = coerce f { given: a }
-  where
-    coerce :: (Given a => r) -> { given :: a } -> r
-    coerce = unsafeCoerce
 
 -- | This class reifies a value of type `a` at the type level.
 -- |
@@ -39,7 +20,6 @@ class Reifies s a | s -> a where
 -- |
 -- | The value can be recovered in the body of the lambda by using the `reflect` function.
 reify :: forall a r. a -> (forall s. Reifies s a => Proxy s -> r) -> r
-reify a f = coerce f { reflect: \_ -> a } Proxy
-  where
-    coerce :: (forall s. Reifies s a => Proxy s -> r) -> { reflect :: Proxy Unit -> a } -> Proxy Unit -> r
-    coerce = unsafeCoerce
+reify a f = coerce f { reflect: \_ -> a } Proxy where
+  coerce :: (forall s. Reifies s a => Proxy s -> r) -> { reflect :: Proxy Unit -> a } -> Proxy Unit -> r
+  coerce = unsafeCoerce
