@@ -2,5 +2,5 @@
 
 Reflecting values at the type level
 
-- [Module Documentation](docs/Data/Reflection.md)
+- [Module Documentation](generated-docs/Data/Reflection.md)
 - [Example](test/Main.purs)
