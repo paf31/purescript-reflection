@@ -41,7 +41,7 @@ reifiedCompare :: forall a. ReifiedOrd a -> a -> a -> Ordering
 #### `reifyOrd`
 
 ``` purescript
-reifyOrd :: forall a r. (a -> a -> Boolean) -> (a -> a -> Ordering) -> (forall s. Reifies s (ReifiedOrd a) => Proxy s -> r) -> r
+reifyOrd :: forall a r. (a -> a -> Ordering) -> (forall s. Reifies s (ReifiedOrd a) => Proxy s -> r) -> r
 ```
 
 

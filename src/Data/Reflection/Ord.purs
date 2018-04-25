@@ -7,7 +7,7 @@ module Data.Reflection.Ord
   , reifyOrd
   ) where
 
-import Prelude (class Eq, class Ord, Ordering)
+import Prelude (class Eq, class Ord, Ordering(..))
 import Data.Reflection (class Reifies, reify, reflect)
 import Type.Proxy (Proxy(..))
 
@@ -32,5 +32,9 @@ instance reflectOrd :: (Reifies s (ReifiedOrd a)) => Ord (ReflectedOrd s a) wher
   compare (ReflectedOrd x) (ReflectedOrd y) =
     reifiedCompare (reflect (Proxy :: Proxy s)) x y
 
-reifyOrd :: forall a r. (a -> a -> Boolean) -> (a -> a -> Ordering) -> (forall s. (Reifies s (ReifiedOrd a)) => Proxy s -> r) -> r
-reifyOrd eq compare f = reify (ReifiedOrd eq compare) f
+reifyOrd :: forall a r. (a -> a -> Ordering) -> (forall s. (Reifies s (ReifiedOrd a)) => Proxy s -> r) -> r
+reifyOrd compare f = reify (ReifiedOrd eq compare) f
+  where
+    eq x y = case compare x y of
+      EQ -> true
+      _ -> false
