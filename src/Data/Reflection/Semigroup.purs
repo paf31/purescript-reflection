@@ -7,7 +7,8 @@ module Data.Reflection.Semigroup
   , reifySemigroup'
   ) where
 
-import Prelude (class Semigroup, ($))
+import Prelude
+
 import Data.Reflection (class Reifies, reify, reflect)
 import Type.Proxy (Proxy(..))
 

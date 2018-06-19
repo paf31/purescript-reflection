@@ -8,8 +8,8 @@ module Data.Reflection.Monoid
   , reifyMonoid'
   ) where
 
-import Prelude (class Semigroup, ($))
-import Data.Monoid (class Monoid)
+import Prelude
+
 import Data.Reflection (class Reifies, reify, reflect)
 import Type.Proxy (Proxy(..))
 

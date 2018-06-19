@@ -7,7 +7,8 @@ module Data.Reflection.Ord
   , reifyOrd
   ) where
 
-import Prelude (class Eq, class Ord, Ordering(..))
+import Prelude
+
 import Data.Reflection (class Reifies, reify, reflect)
 import Type.Proxy (Proxy(..))
 

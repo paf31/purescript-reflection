@@ -6,7 +6,8 @@ module Data.Reflection.Eq
   , reifyEq
   ) where
 
-import Prelude (class Eq)
+import Prelude
+
 import Data.Reflection (class Reifies, reify, reflect)
 import Type.Proxy (Proxy(..))
 

@@ -16,11 +16,10 @@
     "url": "git://github.com/paf31/purescript-reflection.git"
   },
   "dependencies": {
-    "purescript-unsafe-coerce": "^3.0.0",
-    "purescript-monoid": "^3.0.0",
-    "purescript-proxy": "^2.0.0"
+    "purescript-unsafe-coerce": "^4.0.0",
+    "purescript-proxy": "^3.0.0"
   },
   "devDependencies": {
-    "purescript-console": "^3.0.0"
+    "purescript-console": "^4.0.0"
   }
 }
